@@ -72,29 +72,29 @@ def parse_sms(sms_text: str) -> SMSParseResult:
                 result.transaction_type = "DEBIT" if "debited" in match.group(2).lower() else "CREDIT"
                 result.account_last4 = match.group(3)
                 result.date = match.group(4)
-                result.merchant = match.group(5) if match.lastindex >= 5 else None
-                result.reference_number = match.group(6) if match.lastindex >= 6 else None
-                result.available_balance = clean_amount(match.group(7)) if match.lastindex >= 7 else None
+                result.merchant = match.group(5) if match.group(5) is not None else None
+                result.reference_number = match.group(6) if match.group(6) is not None else None
+                result.available_balance = clean_amount(match.group(7)) if match.group(7) is not None else None
             
             elif bank == "SBI":
                 result.account_last4 = match.group(1)
                 result.transaction_type = "DEBIT" if "debited" in match.group(2).lower() else "CREDIT"
                 result.amount = clean_amount(match.group(3))
                 result.date = match.group(4)
-                result.reference_number = match.group(5) if match.lastindex >= 5 else None
+                result.reference_number = match.group(5) if match.group(5) is not None else None
             
             elif bank == "ICICI":
                 result.account_last4 = match.group(1)
                 result.transaction_type = "DEBIT" if "debited" in match.group(2).lower() else "CREDIT"
                 result.amount = clean_amount(match.group(3))
                 result.date = match.group(4)
-                result.merchant = match.group(5) if match.lastindex >= 5 else None
-                result.reference_number = match.group(6) if match.lastindex >= 6 else None
+                result.merchant = match.group(5) if match.group(5) is not None else None
+                result.reference_number = match.group(6) if match.group(6) is not None else None
             
             elif bank == "AXIS":
                 result.amount = clean_amount(match.group(1))
                 result.account_last4 = match.group(2)
-                result.merchant = match.group(3) if match.lastindex >= 3 else None
+                result.merchant = match.group(3) if match.group(3) is not None else None
                 result.date = match.group(4)
                 result.reference_number = match.group(5)
                 result.transaction_type = "DEBIT"  # Axis pattern is for sent money
@@ -104,8 +104,8 @@ def parse_sms(sms_text: str) -> SMSParseResult:
                 result.transaction_type = "DEBIT" if "debited" in match.group(2).lower() else "CREDIT"
                 result.account_last4 = match.group(3)
                 result.date = match.group(4)
-                result.merchant = match.group(5) if match.lastindex >= 5 else None
-                result.available_balance = clean_amount(match.group(6)) if match.lastindex >= 6 else None
+                result.merchant = match.group(5) if match.group(5) is not None else None
+                result.available_balance = clean_amount(match.group(6)) if match.group(6) is not None else None
             
             elif bank == "CREDIT_CARD":
                 result.account_last4 = match.group(1)

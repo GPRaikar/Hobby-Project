@@ -69,6 +69,12 @@ class Investment {
   });
 
   factory Investment.fromJson(Map<String, dynamic> json) {
+    String taxSectionStr = json['tax_section'];
+    // Handle the SEC_ prefix if present, otherwise use as-is
+    if (taxSectionStr.startsWith('SEC_')) {
+      taxSectionStr = taxSectionStr.substring(4);
+    }
+    
     return Investment(
       id: json['id'],
       userId: json['user_id'],
@@ -86,7 +92,7 @@ class Investment {
           ? DateTime.parse(json['maturity_date'])
           : null,
       isTaxSaving: json['is_tax_saving'] ?? false,
-      taxSection: TaxSection.values.byName(json['tax_section'].replaceAll('SEC_', '')),
+      taxSection: TaxSection.values.byName(taxSectionStr),
       folioNumber: json['folio_number'],
       tickerSymbol: json['ticker_symbol'],
       isActive: json['is_active'] ?? true,

@@ -25,8 +25,15 @@ from app.schemas.tax import (
 )
 
 
-def calculate_80c(db: Session, user_id: str, financial_year: str) -> Section80CResponse:
-    """Calculate Section 80C utilization and savings."""
+def calculate_80c(db: Session, user_id: str, financial_year: str, tax_bracket: Decimal = Decimal("0.30")) -> Section80CResponse:
+    """Calculate Section 80C utilization and savings.
+    
+    Args:
+        db: Database session
+        user_id: User ID
+        financial_year: Financial year (e.g., "2025-26")
+        tax_bracket: User's marginal tax rate (default: 30%)
+    """
     # Query investments marked as 80C
     investments = db.query(Investment).filter(
         Investment.user_id == user_id,
@@ -39,8 +46,8 @@ def calculate_80c(db: Session, user_id: str, financial_year: str) -> Section80CR
     remaining = TAX_80C_LIMIT - utilized
     percentage_used = float((utilized / TAX_80C_LIMIT) * 100)
     
-    # Assuming 30% tax bracket for calculation
-    tax_saved = utilized * Decimal("0.30")
+    # Calculate tax saved based on provided tax bracket
+    tax_saved = utilized * tax_bracket
     
     return Section80CResponse(
         total_invested=total_invested,
@@ -52,8 +59,16 @@ def calculate_80c(db: Session, user_id: str, financial_year: str) -> Section80CR
     )
 
 
-def calculate_80d(db: Session, user_id: str, financial_year: str, is_senior: bool = False) -> Section80DResponse:
-    """Calculate Section 80D utilization and savings."""
+def calculate_80d(db: Session, user_id: str, financial_year: str, is_senior: bool = False, tax_bracket: Decimal = Decimal("0.30")) -> Section80DResponse:
+    """Calculate Section 80D utilization and savings.
+    
+    Args:
+        db: Database session
+        user_id: User ID
+        financial_year: Financial year (e.g., "2025-26")
+        is_senior: Whether user is senior citizen
+        tax_bracket: User's marginal tax rate (default: 30%)
+    """
     # Query investments marked as 80D
     investments = db.query(Investment).filter(
         Investment.user_id == user_id,
@@ -75,8 +90,8 @@ def calculate_80d(db: Session, user_id: str, financial_year: str, is_senior: boo
     total_limit = individual_limit + parents_limit
     remaining = total_limit - total_utilized
     
-    # Assuming 30% tax bracket
-    tax_saved = total_utilized * Decimal("0.30")
+    # Calculate tax saved based on provided tax bracket
+    tax_saved = total_utilized * tax_bracket
     
     return Section80DResponse(
         individual_invested=individual_invested,

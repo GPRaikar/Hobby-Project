@@ -1,7 +1,7 @@
 """Constants for the application."""
 from decimal import Decimal
 
-# Tax limits (FY 2025-26)
+# Tax limits for Financial Year 2025-26
 TAX_80C_LIMIT = Decimal("150000")
 TAX_80CCD_1B_LIMIT = Decimal("50000")
 TAX_80D_INDIVIDUAL_LIMIT = Decimal("25000")

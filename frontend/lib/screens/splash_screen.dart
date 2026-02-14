@@ -19,7 +19,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _checkAuthStatus() async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    await Future.delayed(const Duration(seconds: 2)); // Show splash for 2 seconds
     
     final isLoggedIn = await authProvider.checkAuthStatus();
     
