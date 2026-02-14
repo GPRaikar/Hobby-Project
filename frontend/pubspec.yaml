@@ -1,0 +1,77 @@
+name: indian_finance_app
+description: Indian Personal Finance Management App - Combining Rich Dad principles with Indian Tax Planning
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI Components
+  cupertino_icons: ^1.0.6
+  
+  # HTTP Client
+  dio: ^5.4.0
+  
+  # State Management
+  provider: ^6.1.1
+  
+  # SMS Reading
+  flutter_sms_inbox: ^1.0.3
+  
+  # OCR
+  google_ml_kit: ^0.16.3
+  
+  # Charts
+  fl_chart: ^0.66.0
+  
+  # Secure Storage
+  flutter_secure_storage: ^9.0.0
+  
+  # Date/Time Formatting
+  intl: ^0.18.1
+  
+  # Image Picker for Camera
+  image_picker: ^1.0.7
+  
+  # Permissions
+  permission_handler: ^11.2.0
+  
+  # Navigation
+  go_router: ^13.0.0
+  
+  # JSON Serialization
+  json_annotation: ^4.8.1
+  
+  # UUID
+  uuid: ^4.3.3
+  
+  # HTTP utilities
+  http: ^1.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  
+  flutter_lints: ^3.0.0
+  build_runner: ^2.4.8
+  json_serializable: ^6.7.1
+
+flutter:
+  uses-material-design: true
+
+  # Assets
+  # assets:
+  #   - images/
+  #   - icons/
+
+  # Fonts
+  # fonts:
+  #   - family: Roboto
+  #     fonts:
+  #       - asset: fonts/Roboto-Regular.ttf
+  #       - asset: fonts/Roboto-Bold.ttf
+  #         weight: 700
